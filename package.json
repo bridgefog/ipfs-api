@@ -1,17 +1,17 @@
 {
-  "name": "atm-common",
+  "name": "ipfs-api",
   "version": "1.0.0",
-  "description": "Shared logic between components of the AllTheMusic project",
+  "description": "IPFS API wrapper",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/gulp test",
     "ci": "node_modules/.bin/istanbul cover node_modules/.bin/gulp test"
   },
-  "homepage": "https://github.com/allthemusic/atm-common",
-  "bugs": "https://github.com/allthemusic/atm-common/issues",
+  "homepage": "https://github.com/allthemusic/ipfs-api",
+  "bugs": "https://github.com/allthemusic/ipfs-api/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/allthemusic/atm-common.git"
+    "url": "https://github.com/allthemusic/ipfs-api.git"
   },
   "author": "",
   "license": "ISC",
