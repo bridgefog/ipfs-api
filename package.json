@@ -1,5 +1,5 @@
 {
-  "name": "ipfs-api",
+  "name": "atm-ipfs-api",
   "version": "0.0.1",
   "description": "IPFS API wrapper",
   "main": "index.js",
