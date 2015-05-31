@@ -4,6 +4,7 @@
   "description": "IPFS API wrapper",
   "main": "index.js",
   "scripts": {
+    "init": "make init",
     "test": "node_modules/.bin/gulp test",
     "ci": "node_modules/.bin/istanbul cover node_modules/.bin/gulp test"
   },
