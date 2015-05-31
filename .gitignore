@@ -1,5 +1,3 @@
 node_modules/
 coverage/
-static/
-/test/wiremock_scope
-/browser/bundle.js*
+npm-debug.log
