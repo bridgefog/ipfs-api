@@ -1,6 +1,4 @@
-.PHONY: init
+test:
+	npm test
 
-all: init
-
-init:
-	./init
+.PHONY: test

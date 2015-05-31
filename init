@@ -2,14 +2,5 @@
 
 set -e -x
 
-pushd app
-./init
-popd
-
-pushd electron
-./init
-popd
-
-pushd common
-./init
-popd
+npm prune
+npm update
