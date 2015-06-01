@@ -5,16 +5,33 @@ var jshint = require('jshint')
 var gulpJshint = require('gulp-jshint')
 var jshintStylish = require('jshint-stylish')
 var mocha = require('gulp-mocha')
+var babel = require('gulp-babel')
+var sourcemaps = require('gulp-sourcemaps')
 require('babel/register')
 var mochaReporter = require('./test/support/gulp-mocha-reporter')
 var ipfsMock = require('./test/mock-ipfs')
 
 var globs = {
   javascripts: ['{lib,test,bin,demos,script}/**/*.js', '*.js'],
+  dist_javascripts: ['lib/**/*.js', 'index.js'],
   package_json: ['package.json'],
   rc_files: ['../.js*rc'],
   tests: ['test/*.js'],
 }
+
+gulp.task('build', function () {
+  return gulp.src(globs.dist_javascripts)
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      optional: ['runtime'],
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist'))
+})
+
+gulp.task('watch-build', ['build'], function () {
+  return gulp.watch(globs.javascripts, ['build'])
+})
 
 gulp.task('jscs', function () {
   return gulp.src(globs.javascripts)
@@ -48,6 +65,7 @@ gulp.task('watch-mocha', function () {
 })
 
 gulp.task('default', [
+  'watch-build',
   'watch-lint',
   'watch-mocha',
   'test',
