@@ -62,7 +62,7 @@ describe('DagObject', function () {
       }
       return function () {
         it('"Data" is encoded as base64', function () {
-          var expectedData = new Buffer(object.data || '').toString('base64')
+          var expectedData = object.data || '\b\u0001'
           var actualData = subject().Data
           assert.equal(actualData, expectedData)
         })
