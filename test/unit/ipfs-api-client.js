@@ -3,11 +3,11 @@
 import R from 'ramda'
 import { default as chai, assert } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import mockIpfs from './mock-ipfs'
-import { default as IPFSClient, minimumIPFSVersion } from '../lib/ipfs-api-client'
-import { DagObject } from '../lib/dag-object'
-import { concatP } from '../lib/util'
-import Version from '../lib/version'
+import mockIpfs from '../support/mock-ipfs'
+import { default as IPFSClient, minimumIPFSVersion } from '../../lib/ipfs-api-client'
+import { DagObject } from '../../lib/dag-object'
+import { concatP } from '../../lib/util'
+import Version from '../../lib/version'
 
 chai.use(chaiAsPromised)
 

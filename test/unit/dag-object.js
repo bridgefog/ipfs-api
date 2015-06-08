@@ -2,7 +2,7 @@
 
 import { assert } from 'chai'
 import { Set } from 'immutable'
-import { DagObject, DagLink } from '../lib/dag-object'
+import { DagObject, DagLink } from '../../lib/dag-object'
 
 describe('DagObject', function () {
   describe('constructor', function () {
@@ -61,8 +61,8 @@ describe('DagObject', function () {
         return object.asJSONforAPI()
       }
       return function () {
-        it('"Data" is encoded as base64', function () {
-          var expectedData = object.data || '\b\u0001'
+        it('"Data" is present and equal to input', function () {
+          var expectedData = object.data
           var actualData = subject().Data
           assert.equal(actualData, expectedData)
         })
@@ -88,6 +88,6 @@ describe('DagObject', function () {
 
     context('with data & links', examples(new DagObject({ data: 'foo' })
                                           .addLink('name', 'key1')
-                                          .addLink('', 'key2')))
+                                          .addLink('', 'key2', 123)))
   })
 })
