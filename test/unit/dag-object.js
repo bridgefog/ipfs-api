@@ -44,13 +44,13 @@ describe('DagObject', function () {
     it('adds a link to the object with the given name and hash, and maintains order', function () {
       var node = makeNode()
       assert.equal(node.links.size, 0)
-      node = node.addLink('name1', 'hash1')
-      // node = node.addLink('name1', 'hash1')
-      node = node.addLink('name2', 'hash2')
+      node = node.addLink('name1', 'hash1', 42)
+      node = node.addLink('name1', 'hash1', 42)
+      node = node.addLink('name2', 'hash2', 123)
       assert.equal(node.links.size, 2)
       assert.deepEqual(node.links.toJS(), [
-        new DagLink('name1', 'hash1', 0),
-        new DagLink('name2', 'hash2', 0),
+        new DagLink({ name: 'name1', hash: 'hash1', linkedNodeSize: 42 }).toJS(),
+        new DagLink({ name: 'name2', hash: 'hash2', linkedNodeSize: 123 }).toJS(),
       ])
     })
   })
@@ -62,7 +62,7 @@ describe('DagObject', function () {
       }
       return function () {
         it('"Data" is present and equal to input', function () {
-          var expectedData = object.data || '\b\u0001'
+          var expectedData = object.data
           var actualData = subject().Data
           assert.equal(actualData, expectedData)
         })
@@ -72,7 +72,7 @@ describe('DagObject', function () {
             return {
               Name: l.name,
               Hash: l.hash,
-              Size: l.size,
+              Size: l.linkedNodeSize,
             }
           }).toJS()
           assert.deepEqual(subject().Links, expectedLinks)
