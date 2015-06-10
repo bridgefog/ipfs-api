@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "IPFS API wrapper",
   "main": "dist/index.js",
-  "private": true,
   "scripts": {
     "init": "make init",
     "test": "node_modules/.bin/gulp test",
