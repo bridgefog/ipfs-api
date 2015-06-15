@@ -18,7 +18,7 @@ var globs = {
   rc_files: ['./.js*rc'],
   unit_tests: ['test/unit/**/*.js'],
   integration_tests: ['test/integration/**/*.js'],
-  test_support: ['test/integration/**/*.js'],
+  test_support: ['test/support/**/*.js'],
 }
 
 gulp.task('build', function () {
