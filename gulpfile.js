@@ -25,7 +25,7 @@ gulp.task('build', function () {
   return gulp.src(globs.dist_javascripts)
     .pipe(sourcemaps.init())
     .pipe(babel({
-      optional: ['runtime'],
+      optional: ['runtime', 'strict'],
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist'))

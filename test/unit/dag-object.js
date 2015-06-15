@@ -1,5 +1,3 @@
-'use strict'
-
 import { assert } from 'chai'
 import { Set } from 'immutable'
 import { DagObject, DagLink } from '../../lib/dag-object'

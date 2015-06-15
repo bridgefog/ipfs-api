@@ -1,5 +1,3 @@
-'use strict'
-
 import R from 'ramda'
 import { default as chai, assert } from 'chai'
 import chaiAsPromised from 'chai-as-promised'

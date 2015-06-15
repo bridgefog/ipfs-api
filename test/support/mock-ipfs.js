@@ -1,5 +1,3 @@
-'use strict'
-
 import url from 'url'
 import R from 'ramda'
 import { Stubby } from 'stubby'
