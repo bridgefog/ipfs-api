@@ -4,7 +4,7 @@ import chaiAsPromised from 'chai-as-promised'
 import mockIpfs from '../support/mock-ipfs'
 import { default as IPFSClient, minimumIPFSVersion } from '../../lib/ipfs-api-client'
 import { DagObject } from '../../lib/dag-object'
-import { concatP } from '../../lib/util'
+import { concatP, concatRawP } from '../../lib/util'
 import Version from '../../lib/version'
 
 chai.use(chaiAsPromised)
@@ -250,6 +250,24 @@ describe('IPFS API', function () {
         .then(() => ipfs.pinAdd(knownHashes.foo))
         .then(response => assert.deepEqual(response, [knownHashes.foo]))
       })
+    })
+  })
+
+  describe('cat', function () {
+    it('pulls down the raw contents of the file', function () {
+      return mockIpfs.mock([{
+        request: {
+          url: '/api/v0/cat',
+          query: { arg: knownHashes.foo },
+          method: 'GET',
+        },
+        response: {
+          headers: { 'content-type': 'text/plain' },
+          body: 'foo bar',
+        },
+      }])
+      .then(() => ipfs.cat(knownHashes.foo).then(concatRawP))
+      .then(response => assert.deepEqual(response.toString(), 'foo bar'))
     })
   })
 })
