@@ -230,4 +230,26 @@ describe('IPFS API', function () {
       })
     })
   })
+
+  describe('pinAdd', function () {
+    context('given default options', function () {
+      it('resolves after pinning the given ids', function () {
+        return mockIpfs.mock([{
+          request: {
+            url: '/api/v0/pin/add',
+            query: { arg: knownHashes.foo },
+            method: 'GET',
+          },
+          response: {
+            headers: { 'content-type': 'application/json' },
+            body: {
+              Pinned: [knownHashes.foo],
+            },
+          },
+        }])
+        .then(() => ipfs.pinAdd(knownHashes.foo))
+        .then(response => assert.deepEqual(response, [knownHashes.foo]))
+      })
+    })
+  })
 })
