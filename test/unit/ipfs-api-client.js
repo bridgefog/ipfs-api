@@ -270,4 +270,22 @@ describe('IPFS API', function () {
       .then(response => assert.deepEqual(response.toString(), 'foo bar'))
     })
   })
+
+  describe('get', function () {
+    it('forwards the raw response as a stream from ipfs /get', function () {
+      return mockIpfs.mock([{
+        request: {
+          url: '/api/v0/get',
+          query: { arg: knownHashes.foo },
+          method: 'GET',
+        },
+        response: {
+          headers: { 'content-type': 'application/octet-stream' },
+          body: 'foo bar',
+        },
+      }])
+      .then(() => ipfs.get(knownHashes.foo).then(concatRawP))
+      .then(response => assert.deepEqual(response.toString(), 'foo bar'))
+    })
+  })
 })
