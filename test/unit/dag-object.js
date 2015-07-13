@@ -53,6 +53,22 @@ describe('DagObject', function () {
     })
   })
 
+  describe('linkNamed', () => {
+    function makeNode() {
+      return new DagObject()
+        .addLink('foo', 'hash1', 0)
+        .addLink('bar', 'hash2', 0)
+        .addLink('baz', 'hash3', 0)
+    }
+
+    it('returns the link with name matching argument', () => {
+      var obj = makeNode()
+
+      assert.equal(obj.linkNamed('bar').hash, 'hash2')
+      assert.equal(obj.linkNamed('foo').hash, 'hash1')
+    })
+  })
+
   describe('asJSONforAPI', function () {
     function examples(object) {
       var subject = function () {
