@@ -68,6 +68,21 @@ describe('DagObject', function () {
       assert.equal(obj.linkNamed('bar').hash, 'hash2')
       assert.equal(obj.linkNamed('foo').hash, 'hash1')
     })
+
+    it('throws when name is not found', () => {
+      var obj = makeNode()
+
+      assert.throws(() => obj.linkNamed('babaganoush'), /does not exist/)
+    })
+
+    it('throws when name is found more than once', () => {
+      var obj = makeNode()
+      var getBar = () => obj.linkNamed('bar')
+
+      assert.doesNotThrow(getBar)
+      obj.addLink('bar', 'QmMutiHash', 0)
+      assert.throws(getBar, /multiple/i)
+    })
   })
 
   describe('#asJSONforAPI()', function () {
