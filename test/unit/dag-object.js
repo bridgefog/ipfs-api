@@ -8,16 +8,17 @@ describe('DagObject', function () {
       it('is empty', function () {
         var node = new DagObject()
         assert.equal(node.data, null)
+        assert.instanceOf(node.links, Set)
         assert.equal(node.links.size, 0)
       })
     })
 
     context('with just links', function () {
-      it('has links but no data', function () {
+      it('it is empty', function () {
         var node = new DagObject({ links: new Set([1, 2, 3]) })
         assert.equal(node.data, null)
-        assert.equal(node.links.size, 3)
-        assert.deepEqual(node.links.toJS(), [1, 2, 3])
+        assert.instanceOf(node.links, Set)
+        assert.equal(node.links.size, 0)
       })
     })
 
