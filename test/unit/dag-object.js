@@ -105,4 +105,32 @@ describe('DagObject', function () {
                                           .addLink('name', 'key1')
                                           .addLink('', 'key2', 123)))
   })
+
+  describe('.fromAPI()', () => {
+    it('builds a DagObject given raw API-style JS object', () => {
+      var rawObj = {
+        Data: 'foo',
+        Links: [
+          {
+            Name: 'bar',
+            Hash: 'QmFSDF',
+            Size: 3426,
+          },
+          {
+            Name: 'biz',
+            Hash: 'QmMutiHash',
+            Size: 1242,
+          },
+        ],
+      }
+
+      var dagObj = DagObject.fromAPI(rawObj)
+
+      assert.instanceOf(dagObj, DagObject)
+      assert.equal(dagObj.data, 'foo')
+      assert.equal(dagObj.links.size, 2)
+      assert.deepEqual(dagObj.links.toJS()[0], new DagLink('bar', 'QmFSDF', 3426))
+      assert.deepEqual(dagObj.links.toJS()[1], new DagLink('biz', 'QmMutiHash', 1242))
+    })
+  })
 })
