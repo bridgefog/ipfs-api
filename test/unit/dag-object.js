@@ -30,7 +30,7 @@ describe('DagObject', function () {
     })
   })
 
-  describe('addLink', function () {
+  describe('#addLink()', function () {
     function makeNode() {
       return new DagObject()
     }
@@ -54,7 +54,7 @@ describe('DagObject', function () {
     })
   })
 
-  describe('linkNamed', () => {
+  describe('#linkNamed()', () => {
     function makeNode() {
       return new DagObject()
         .addLink('foo', 'hash1', 0)
@@ -70,7 +70,7 @@ describe('DagObject', function () {
     })
   })
 
-  describe('asJSONforAPI', function () {
+  describe('#asJSONforAPI()', function () {
     function examples(object) {
       var subject = function () {
         return object.asJSONforAPI()

@@ -20,7 +20,7 @@ describe('IPFS API', function () {
     return mockIpfs.reset()
   })
 
-  describe('assertVersionCompatible', function () {
+  describe('#assertVersionCompatible()', function () {
     var versionString
 
     beforeEach(function () {
@@ -54,7 +54,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('version', function () {
+  describe('#version()', function () {
     it('returns the IPFS version of this local node', function () {
       var expectedResult = new Version(0, 3, 3)
       return mockIpfs.mock([{
@@ -72,7 +72,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('peerID', function () {
+  describe('#peerID()', function () {
     it('returns the peerID of this local node', function () {
       return mockIpfs.mock([{
         request: {
@@ -89,7 +89,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('objectGet', function () {
+  describe('#objectGet()', function () {
     it('retrieves the dag object described by the given hash', function () {
       var dagNode = new DagObject({ data: 'foo' })
 
@@ -113,7 +113,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('objectPut', function () {
+  describe('#objectPut()', function () {
     it('returns a thing with the correct Hash', function () {
       var dagNode = new DagObject({ data: 'foo' })
 
@@ -137,7 +137,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('namePublish', function () {
+  describe('#namePublish()', function () {
     it('can publish a key to itself', function () {
       return mockIpfs.mock([{
         request: {
@@ -158,7 +158,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('nameResolve', function () {
+  describe('#nameResolve()', function () {
     context('requests /name/resolve with the given peerId', function () {
       it('returns the resolved key', function () {
         var peerId = 'peer_id_1234'
@@ -180,7 +180,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('dhtFindprovs', function () {
+  describe('#dhtFindprovs()', function () {
     context('the given contentID', function () {
       // FIXME: Make this stub return chunked response correctly
       it('returns array of peerIds who have contentID', function () {
@@ -231,7 +231,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('pinAdd', function () {
+  describe('#pinAdd()', function () {
     context('given default options', function () {
       it('resolves after pinning the given ids', function () {
         return mockIpfs.mock([{
@@ -253,7 +253,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('cat', function () {
+  describe('#cat()', function () {
     it('pulls down the raw contents of the file', function () {
       return mockIpfs.mock([{
         request: {
@@ -271,7 +271,7 @@ describe('IPFS API', function () {
     })
   })
 
-  describe('get', function () {
+  describe('#get()', function () {
     it('forwards the raw response as a stream from ipfs /get', function () {
       return mockIpfs.mock([{
         request: {
