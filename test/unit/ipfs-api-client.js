@@ -11,8 +11,11 @@ chai.use(chaiAsPromised)
 
 var ipfs = new IPFSClient(mockIpfs.endpoint)
 
+var someStuffToAdd = new Buffer('this is a buffer with some text')
+
 var knownHashes = {
-  foo: 'QmWqEeZS1HELySbm8t8U55UkBe75kaLj9WnFb882Tkf5NL'
+  foo: 'QmWqEeZS1HELySbm8t8U55UkBe75kaLj9WnFb882Tkf5NL',
+  someStuffToAdd: 'QmQVnzkcVbpWPPHMRkHERFWixJrFGmuJSKx9BEXqazVsvk',
 }
 
 describe('IPFS API', function () {
@@ -269,6 +272,29 @@ describe('IPFS API', function () {
       }])
       .then(() => ipfs.cat(knownHashes.foo).then(concatRawP))
       .then(response => assert.deepEqual(response.toString(), 'foo bar'))
+    })
+  })
+
+  describe('#add()', function () {
+    it('accepts a buffer and returns an IPFS key after adding the contents of the buffer to IPFS', () => {
+      return mockIpfs.mock([{
+        request: {
+          url: '/api/v0/add',
+          query: {},
+          method: 'POST',
+        },
+        response: {
+          headers: { 'content-type': 'application/json' },
+          body: {
+            Name: '_',
+            Hash: knownHashes.someStuffToAdd,
+          },
+        },
+      }])
+      .then(() => ipfs.add(someStuffToAdd))
+      .then(key => {
+        assert.equal(key, knownHashes.someStuffToAdd)
+      })
     })
   })
 
